@@ -5,19 +5,42 @@ Name = document.querySelector("#myName")
 Name.innerHTML = `${Name.innerHTML} <small style="color:red">${myName}</small>`
 
 
-//let [month, date, year]    = new Date().toLocaleDateString("en-US").split("/")
-//let [hour, minute, second] = new Date().toLocaleTimeString("en-US").split(/:| /)
-//Date.innerHTML = `${Date.innerHTML} <small style="color:red">${myClock}</small>`
-
-var tarih=new Date();
-	
-	var gun=tarih.getDay();
-	var saat=tarih.getHours();
-	var dakika=tarih.getMinutes();
-	var saniye=tarih.getSeconds();	
 
 
-    Name = document.querySelector("#tarih")
+function startTime() {
+	var today = new Date();
+	var h = today.getHours();
+	var m = today.getMinutes();
+	var s = today.getSeconds();
+	var d = today.getDay();
 
-Name.innerHTML = `${Name.innerHTML} <small>${tarih}</small>`
+	switch(d) {
+		case 0: d="PAZAR";
+		break;
+		case 1: d="PAZARTESİ";
+		break;
+		case 2: d="SALI";
+		break;
+		case 3: d="ÇARŞAMBA";
+		break;
+		case 4: d="PERŞEMBE";
+		break;
+		case 5: d="CUMA";
+		break;
+		case 6: d="CUMARTESİ";
+	}
 
+	m = checkTime(m);
+	s = checkTime(s);
+	document.getElementById("myClock").innerHTML = h+ ":" + m + ":" + s + " | " +d;
+	t = setTimeout(function(){ startTime() }, 500);
+  }
+  
+  function checkTime(i) {
+	if (i<10) {
+	  i = "0" + i;
+	}
+	return i;
+  }	
+  
+  startTime();
